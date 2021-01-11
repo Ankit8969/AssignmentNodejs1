@@ -1,0 +1,67 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: content-box;
+}
+form
+{
+    width:600px;
+    margin:0 auto;
+    font-size: 1.2rem;
+}
+input
+{
+    padding-left:5px;
+    height: 30px;
+}
+.namePhone ,.cart , .address{
+    margin-top:10px;
+}
+.namePhone, .phone,.completeAddress,.cart,.pinCountry
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.namePhone div , .cart div
+{
+    width:50%;
+}
+.namePhone div input 
+{
+    width:80%;
+}
+.cart div input 
+{
+    width:79%;
+}
+.address .contactName input
+{
+    width:79%;
+}
+.completeAddress div
+{
+    width:37%;
+}
+.pinCountry div 
+{
+    width:50%;
+}
+.pinCountry div input 
+{
+    width:70%;
+}
+
+.btn
+{
+    width:100px;
+    background: none;
+    font-weight: bold;
+    transition:all 0.3s ease;   
+    border:1px solid green;
+}
+.btn:hover 
+{
+    color:white;
+    background: green;
+}

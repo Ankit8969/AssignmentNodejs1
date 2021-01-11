@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/register.css">
+    <style>
+        .error
+        {
+            font-size:15px;
+            color:red;
+        }
+    </style>
+</head>
+<body>
+    <form action="/" method="POST" id="form">
+        <div class="error"></div>
+        <div class="namePhone">
+            <div class="name">
+                <label for="name">Name</label>
+                <input class="nameInput" type="text" name="name" id="">
+            </div>
+            <div class="phone">
+                <label for="phone">Phone</label>
+                <input type="number" name="phone" id="" required>
+            </div>
+        </div>
+        <div class="cart">
+            <div class="IDE">
+                <label for="ide">Cart IDE</label>
+                <input type="text" name="ide" id="" required>
+            </div>
+            <div class="count">
+                <label for="">Cart Count</label>
+                <input type="number" name="count" id="" required>
+            </div>
+        </div>
+        <div class="address">
+            <p>Address</p>
+            <div class="contactName">
+                <label for="contactName">Contact Name</label>
+                <input type="text" name="contactName" id=""  required>
+            </div>
+            <div class="completeAddress">
+                <div class="line1">
+                    <label for="line1">Line 1</label>
+                    <input type="text" name="line1" id="" required>
+                </div>
+                <div class="line1">
+                    <label for="line1">Line 2</label>
+                    <input type="text" name="line2" id="" required>
+                </div>
+                <div class="line1">
+                    <label for="line1">Line 3</label>
+                    <input type="text" name="line3" id="" required>
+                </div>
+            </div>
+            <div class="pinCountry">
+                <div class="pin">
+                    <label for="pin">Pin Code</label>
+                    <input type="number" name="pin" id="" required>
+                </div>
+                <div class="country">
+                    <label for="country">Country</label>
+                    <input type="text" name="country" id="" required>
+                </div>
+            </div>
+        </div>
+        <input class="btn" type="submit" value="Submit">
+    </form>
+    <script src="js/register.js"></script>
+</body>
+</html>
