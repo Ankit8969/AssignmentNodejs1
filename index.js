@@ -1,57 +1,81 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const port = process.env.PORT || 3000
-const app = express()
-const mongoose = require('mongoose')
-const mongodb = require('mongodb')
-app.use(bodyParser.urlencoded({extended:false}));
-app.set('view engine' , "ejs")
+const mongoose = require('mongoose');
+const app = express();
+const PORT = process.env.PORT || 3000
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.set('view engine', "ejs")
 app.use(express.static('public'))
 
-mongoose.connect('mongodb://127.0.0.1:27017/ShoppingCart', {
-    useNewUrlParser:true , 
-    useCreateIndex:true,
-    useUnifiedTopology:true
-})
 const User = require('./models/user')
 
-app.get('/' , (req,res)=>{
-    res.render('register')
+// hnAS0Nwke94AKnHX
+
+mongoose.connect('mongodb://127.0.0.1:27017/gogaga', {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useUnifiedTopology: true
 })
 
-app.post('/' ,async (req,res)=>{
 
-    const temp1 = {
-        id:req.body.ide,
-        count:req.body.count
+
+app.get('/', (req, res) => {
+    const tempUser1 = [], tempUser2 = [];
+    try {
+        res.status(200).render('home', { tempUser1: tempUser1, tempUser2: tempUser2 })
     }
-
-    const temp2 = {
-        contactName:req.body.contactName,
-        detailAddress:{
-            line1:req.body.line1,
-            line2:req.body.line2,
-            line3:req.body.line3
-        },
-        pin:req.body.pin,
-        country:req.body.country
+    catch (e) {
+        res.status(401).send('Something Went wrong ' + e)
     }
+})
 
-    const user =new User({
-        name:req.body.name,
-        phone:req.body.phone
-    })
-    user.carts.push(temp1)
-    user.address.push(temp2)
+app.get('/add-user', (req, res) => {
+    try {
+        res.status(200).render('add')
+    }
+    catch
+    {
+        res.status(401).send('Something wrong in Adding User')
+    }
+})
 
-    await user.save().then((result)=>{
-        res.send("Successfully Registered")
-    }).catch((e)=>{
-        res.send(e)
-    })
+app.post('/', async (req, res) => {
+    try {
+        const tempUser = new User({
+            firstName: req.body.first.toLowerCase(),
+            lastName: req.body.last.toLowerCase(),
+            location: req.body.location.toLowerCase()
+        })
+
+        await tempUser.save()
+            .then((result) => {
+                res.redirect('/')
+            }).catch((e) => {
+                res.send("Something gone wrong during saving our data " + e)
+            })
+
+    } catch (e) {
+        console.log(e)
+    }
 
 })
 
-app.listen(port, () => {
-    console.log(`Server started on ${port}`);
+app.post('/search', async (req, res) => {
+    try {
+        console.log(req.body.search)
+        const tempUser1 = await User.find({ firstName: req.body.search.toLowerCase() })
+
+        const tempUser2 = await User.find({ location: req.body.search.toLowerCase() })
+
+        res.render('home', { tempUser1: tempUser1, tempUser2: tempUser2 })
+
+    }
+    catch (e) {
+        console.log("DUring Searching " + e);
+    }
+})
+
+app.listen(PORT, () => {
+    console.log(`Server started on ${PORT}`);
 });

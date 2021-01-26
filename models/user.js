@@ -1,70 +1,28 @@
 const mongoose = require('mongoose')
 
-const userSchema = new mongoose.Schema({
-    name: {
-        type:String,
-        lowercase:true,
-        default: 'John',
-        enum: ['john', 'roshan', 'doe'],
-        trim:true
+const postSchema = new mongoose.Schema({
+    firstName: {
+        type: String,
+        lowercase: true,
+        required: true,
+        trim: true
     },
-    phone: {
-        type: Number,
-        trim:true,
-        required:true   
+    lastName: {
+        type: String,
+        required: true,
+        lowercase: true,
+        trim: true
     },
-    carts:[
-        {
-            id:{
-                type:String,
-                trim:true,
-                required:true
-            },
-            count:{
-                type:Number,
-                trim:true,
-                required:true
-            }
-        }
-    ],
-    address:[
-        {
-            contactName:{
-                type:String,
-                trim:true,
-                required:true
-            },
-            detailAddress:{
-                line1:{
-                    type:String,
-                    trim:true,
-                    required:true
-                },
-                line2:{
-                    type:String,
-                    trim:true,
-                    required:true
-                },
-                line3:{
-                    type:String,
-                    trim:true,
-                    required:true
-                }
-            },
-            pin:{
-                type:Number,
-                required:true
-            },
-            country:{
-                type:String,
-                trim:true,
-                required:true
-            }
-        }
-    ],
-    
+    location: {
+        type: String,
+        lowercase: true,
+        required: true,
+        trim: true
+    }
 })
 
-const User = new mongoose.model('User' , userSchema)
 
-module.exports = User 
+
+const User = new mongoose.model('User', postSchema)
+
+module.exports = User
